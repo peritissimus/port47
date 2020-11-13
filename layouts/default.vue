@@ -26,7 +26,9 @@ a, div, canvas {
   padding: 0;
 }
 
-
+.text {
+  color: #f2f2f2;  
+}
 .navbar {
   width: 80%;
   position: fixed;

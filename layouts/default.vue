@@ -6,7 +6,15 @@
 
 
 
-<style>
+<style lang="scss">
+
+:root {
+  --color-1: #f2f2f2;
+  --color-2: #a6a6a6;
+  --color-3: #595959;
+  --color-4: #262626;
+  --color-5: #0d0d0d;
+}
 
 html {
   font-family: Montserrat;
@@ -27,14 +35,14 @@ a, div, canvas {
 }
 
 .text {
-  color: #f2f2f2;  
+  color: var(--color-1);  
 }
 .navbar {
   width: 80%;
   position: fixed;
   top: 50px;
   left: 50%;
-  color: #f2f2f2;
+  color: var(--color-1);
   transform: translateX(-50%);
   text-align: right;
   z-index: 10;

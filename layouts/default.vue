@@ -1,8 +1,29 @@
 <template>
   <div>
+    <div class="cursor">
+      <div class="cursor__frame"></div>
+      <div class="cursor__icon"></div>
+    </div>
     <Nuxt />
   </div>
 </template>
+
+<script>
+
+export default {
+  mounted: function() {
+
+    const cursor = document.querySelector('.cursor__frame');
+    const cursorf = document.querySelector('.cursor__icon')
+    document.addEventListener('mousemove', e => {
+      cursor.setAttribute("style", "top: "+(e.pageY-33)+"px; left: "+(e.pageX-33)+"px");
+      cursorf.setAttribute("style", "top: "+(e.pageY-14)+"px; left: "+(e.pageX-14)+"px");
+    })
+
+
+  }
+}
+</script>
 
 
 
@@ -18,6 +39,7 @@
 
 html {
   font-family: Montserrat;
+  background-color: var(--color-5);
 }
 
 body{
@@ -83,5 +105,64 @@ a, div, canvas {
   text-align: center;
 }
 
+.cursor {
+
+  position: fixed;
+  pointer-events: none;
+  z-index:100;
+
+
+
+  &__frame{
+    z-index: 100;
+    width: 50px;
+    height: 50px;
+    border: 2px solid var(--color-1);
+    border-radius: 50%;
+    position: absolute;
+    transition-duration: 250ms;
+    transition-timing-function: ease-out;
+
+  }
+
+  &__icon {
+    z-index:100;
+    width: 12px;
+    height:12px;
+    border-radius: 50%;
+    background-color: var(--color-1);
+    transition-duration: 100ms;
+    transition-timing-function: ease-out;
+    position: absolute;
+
+  }
+}
+
+.is_hovered{
+  border: 2px solid var(--color-2);
+  // background-color: var(--color-2);
+  transform: scale(1.5);
+
+}
+
+.is_hidden{
+  display: none;
+}
+
+.link_hover{
+  transform: scale(1.25);
+
+  &__icon{
+    background-color: none;
+    border:1px;
+    display: none;
+  }
+}
+
+
+.cursor__click{
+  background-color: var(--color-5);
+  mix-blend-mode: difference;
+}
 
 </style>

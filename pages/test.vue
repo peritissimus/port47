@@ -1,85 +1,96 @@
 <template>
-  <div class="container">
-      <h1>Hello</h1>
+  <div class="container mainwindow">
+      <div class="menu_wrapper">
+        <div class="menubg"></div>
+        <span class="line__top"></span>
+        <span class="line__bottom"></span>
+        <span class="line__left"></span>
+        <span class="line__right"></span>
+      </div>
   </div>
 </template>
 
 <script>
-import p5 from "p5";
+import * as THREE from "three";
 
 export default {
   head: {
     title: "Kushal | Test",
   },
 
-  mounted() {
-    console.log(window.innerWidth);
-    const script = function (p5) {
-
-        let c, r;
-        let s = 15;
-        let f = 0;
-
-      p5.windowResized = (_) => {
-        // console.log("resized")
-        p5.resizeCanvas(p5.windowWidth, p5.windowHeight);
-      };
-      // NOTE: Set up is here
-      p5.setup = (_) => {
-        p5.createCanvas(p5.windowWidth, p5.windowHeight);
-
-        c = p5.windowWidth / s;
-        r = p5.windowHeight / s;
-      };
-
-      // NOTE: Draw is here
-      p5.draw = (_) => {
-        p5.background(0);
-        p5.stroke(255);
-        p5.noFill();
-
-        f += 0.04;
-
-        let yf = f;
-        for ( let y= 0; y< r; y++){
-            let xf = 0.0;
-            for (let x = 0;x<c;x++){
-                let ch = p5.map(p5.noise(xf,yf),0,1,-1,4);
-                p5.fill(ch*10, ch*10, ch*10);
-                p5.noStroke();
-                xf +=0.6;
-                p5.rect(x * s , y * s, s, s);
-            }
-            yf +=0.6;
-        }
-
-
-      };
-    }; 
-    
-    // NOTE: Use p5 as an instance mode
-    const P5 = require("p5");
-    new P5(script);
-  },
+  mounted: function() {
+  }
 };
 </script>
 
-<style>
-.test {
-  background-color: #2e2e2e;
-  background-size: cover;
-  background-position: 50%;
-  color: #f2f2f2;
-}
-
-h1 {
-    color: #f2f2f2;
-}
-
-canvas{
-    position: fixed;
+<style lang="scss">
+.line{
+  
+  &__top{
+    transform-origin: top left;
+    top:0;
+    left:0;
+    width: 100%;
+    height: 2px;
+    background-color: var(--color-2);
+    transition: transform 1.2s cubic-bezier(1,0,0,1) .8s,background-color .4s linear,-webkit-transform 1.2s cubic-bezier(1,0,0,1) .8s;
+    display: block;
+  position: absolute;
+  z-index: 4;
+  }
+  &__bottom{
+    width: 100%;
+    height: 2px;
+    background-color: var(--color-2);
+    bottom: 0;
+    right: 0;
+    transform-origin: bottom right;
+    transition: transform 1.2s cubic-bezier(1,0,0,1) .8s,background-color .4s linear,-webkit-transform 1.2s cubic-bezier(1,0,0,1) .8s;
+    display: block;
+  position: absolute;
+  z-index: 4;
+  }
+  &__right{
+    width: 2px;
+    height: 100%;
+    background-color: var(--color-2);
     top: 0;
+    right: 0;
+    transform-origin: top right;
+    transition: transform 1.2s cubic-bezier(1,0,0,1) .8s,background-color .4s linear,-webkit-transform 1.2s cubic-bezier(1,0,0,1) .8s;
+    display: block;
+  position: absolute;
+  z-index: 4;
+  }
+  &__left{
+    width: 2px;
+    height: 100%;
+    transform-origin: bottom left;
+    bottom: 0;
     left: 0;
-    z-index: -1;
+    background-color: var(--color-2);
+    transition: transform 1.2s cubic-bezier(1,0,0,1) .8s,background-color .4s linear,-webkit-transform 1.2s cubic-bezier(1,0,0,1) .8s;
+    display: block;
+  position: absolute;
+  z-index: 4;
+  }
 }
+.mainwindow{
+  transition: opacity .4s linear .4s;
+}
+
+.menu_wrapper{
+  top: 20px;
+  bottom:auto;
+  left: 20px;
+  right: 20px;
+  height: 104px;
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  overflow: hidden;
+  z-index: 90;
+  position: fixed;
+}
+
 </style>
